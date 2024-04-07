@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.authors = ["Щавинская Ульяна", "Бойков Никита", "Шматко Алина", "Кирий Семён", "Хасанзянов Григорий"]
   spec.email = ["ulyanalana2003@gmail.com"]
 
-  spec.summary = "test"
+  spec.summary = "игра"
   spec.description = "test"
   spec.homepage = "https://github.com/Ulllana/minesweeper_gem"
   spec.license = "MIT"
