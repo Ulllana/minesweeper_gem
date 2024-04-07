@@ -37,7 +37,31 @@ module Minesweeper
         end
       end
     end
+    
+    def calculate_adjacent_mines
+      @grid.each_with_index do |row, y|
+        row.each_with_index do |cell, x|
+          next if cell.mine
+          adjacent_cells(x, y).each do |adj_x, adj_y|
+            cell.adjacent_mines += 1 if @grid[adj_y][adj_x].mine
+          end
+        end
+      end
+    end
+    
+    def adjacent_cells(x, y)
+      adjacent = []
+      (-1..1).each do |dx|
+        (-1..1).each do |dy|
+          next if dx == 0 && dy == 0
+          adj_x, adj_y = x + dx, y + dy
+          adjacent << [adj_x, adj_y] if adj_x.between?(0, @width-1) && adj_y.between?(0, @height-1)
+        end
+      end
+      adjacent
+    end
   end
+  
 
   class Game
 
