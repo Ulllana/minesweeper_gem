@@ -37,7 +37,7 @@ module Minesweeper
         end
       end
     end
-    
+  
     def calculate_adjacent_mines
       @grid.each_with_index do |row, y|
         row.each_with_index do |cell, x|
@@ -48,7 +48,7 @@ module Minesweeper
         end
       end
     end
-    
+  
     def adjacent_cells(x, y)
       adjacent = []
       (-1..1).each do |dx|
@@ -59,6 +59,56 @@ module Minesweeper
         end
       end
       adjacent
+    end
+  
+    def display
+      puts "  #{(0...@width).to_a.join(' ')}"
+      @grid.each_with_index do |row, index|
+        print "#{index} "
+        row.each do |cell|
+          if cell.revealed
+            print cell.mine ? '*' : cell.adjacent_mines.to_s
+          else
+            print cell.flagged ? 'F' : '?'
+          end
+          print ' '
+        end
+        puts
+      end
+    end
+  
+    def reveal(x, y)
+      cell = @grid[y][x]
+      return if cell.revealed || cell.flagged
+    
+      cell.revealed = true
+      if cell.adjacent_mines == 0 && !cell.mine
+        adjacent_cells(x, y).each { |adj_x, adj_y| reveal(adj_x, adj_y) }
+      end
+    end
+  
+    def reveal_all
+      @grid.each do |row|
+        row.each do |cell|
+          cell.revealed = true
+        end
+      end
+    end
+  
+    def game_over?
+      if @grid.any? { |row| row.any? { |cell| cell.mine && cell.revealed } }
+        puts "Поражение! Вы наступили на мину."
+        true
+      elsif @grid.all? { |row| row.all? { |cell| cell.mine || cell.revealed } }
+        puts "Победа!"
+        true
+      else
+        false
+      end
+    end
+  
+    def cell_at(x, y)
+      @grid[y][x]
     end
   end
   
