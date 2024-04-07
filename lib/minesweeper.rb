@@ -194,4 +194,9 @@ module Minesweeper
       game.play
     end
   end
+  
+  def play_game
+    menu = Menu.new()
+    menu.start_game
+  end
 end
