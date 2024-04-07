@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email = ["ulyanalana2003@gmail.com"]
 
   spec.summary = "игра"
-  spec.description = "test"
+  spec.description = "игра в сапера"
   spec.homepage = "https://github.com/Ulllana/minesweeper_gem"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.0.0"
