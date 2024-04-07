@@ -111,10 +111,29 @@ module Minesweeper
       @grid[y][x]
     end
   end
-  
 
   class Game
-
+    def initialize(width, height, num_mines)
+      @board = Board.new(width, height, num_mines)
+      @game_over = false
+    end
+  
+    def play
+      until @game_over
+        system "clear" or system "cls"
+        @board.display
+        puts "Управление: (r x y для открытия клетки, f x y чтобы отметить/снять отметку, q завершить игру):"
+        input = gets.chomp
+        handle_input(input)
+        if @game_over
+          @board.reveal_all  
+          system "clear" or system "cls"
+          @board.display     
+          puts "Игра окончена! Нажмите любую клавишу, чтобы выйти."
+          gets
+        end
+      end
+    end
   end
 
   class Menu
