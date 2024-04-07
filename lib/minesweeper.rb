@@ -157,6 +157,41 @@ module Minesweeper
   end
 
   class Menu
-
+    def start_game
+      puts "Добро пожаловать в Сапёр!"
+      puts "Выберите сложность или создайте свою игру:"
+      puts "1 - Своя игра"
+      puts "2 - Легкий"
+      puts "3 - Средний"
+      puts "4 - Сложный"
+    
+      print "Выберите (1-4): "
+      choice = gets.chomp.to_i
+    
+      case choice
+      when 1
+        print "Введите ширину поля: "
+        width = gets.chomp.to_i
+        print "Введите высоту поля: "
+        height = gets.chomp.to_i
+        print "Введите количество мин: "
+        num_mines = gets.chomp.to_i
+      when 2
+        # Легкая сложность
+        width, height, num_mines = 9, 9, 10
+      when 3
+        # Средняя сложность
+        width, height, num_mines = 16, 16, 40
+      when 4
+        # Тяжелая сложность
+        width, height, num_mines = 30, 16, 99
+      else
+        puts "Неправильный ввод. Игра начнется в легком режиме."
+        width, height, num_mines = 9, 9, 10
+      end
+    
+      game = Game.new(width, height, num_mines)
+      game.play
+    end
   end
 end
