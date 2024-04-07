@@ -134,6 +134,26 @@ module Minesweeper
         end
       end
     end
+    
+    def handle_input(input)
+      command, x, y = input.split
+      x = x.to_i
+      y = y.to_i
+  
+      case command.downcase
+      when 'r'
+        @board.reveal(x, y)
+        @game_over = @board.game_over?
+      when 'f'
+        cell = @board.cell_at(x, y)
+        cell.flagged = !cell.flagged unless cell.revealed
+      when 'q'
+        puts "Выход..."
+        @game_over = true
+      else
+        puts "Неправильный ввод."
+      end
+    end
   end
 
   class Menu
