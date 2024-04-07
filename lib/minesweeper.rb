@@ -4,5 +4,19 @@ require_relative "minesweeper/version"
 
 module Minesweeper
   class Error < StandardError; end
-  # Your code goes here...
+  class Cell
+
+  end
+
+  class Board
+
+  end
+
+  class Game
+
+  end
+
+  class Menu
+
+  end
 end
