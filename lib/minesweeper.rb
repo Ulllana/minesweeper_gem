@@ -104,6 +104,7 @@ module Minesweeper
   
     # Проверка, окончена ли игра (победа/поражение)
     def game_over?
+      system "clear" or system "cls"
       if @grid.any? { |row| row.any? { |cell| cell.mine && cell.revealed } }
         puts "Поражение! Вы наступили на мину."
         true
@@ -135,7 +136,6 @@ module Minesweeper
         handle_input(input)
         if @game_over
           @board.reveal_all  
-          system "clear" or system "cls"
           @board.display  
           puts "Игра окончена! Нажмите любую клавишу, чтобы выйти."
           gets

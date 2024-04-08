@@ -1,3 +1,3 @@
-require 'saper'
-include Saper
-Saper.play_saper()
+require 'minesweeper'
+include Minesweeper
+Minesweeper.play_game()
