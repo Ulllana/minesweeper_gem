@@ -18,6 +18,7 @@ module Minesweeper
   class Board
     attr_reader :width, :height, :num_mines
   
+    # Инициализация ширины, высоты и количества мин. Инициализация новой доски
     def initialize(width, height, num_mines)
       @width, @height, @num_mines = width, height, num_mines
       @grid = Array.new(height) { Array.new(width) { Cell.new } }
@@ -25,6 +26,7 @@ module Minesweeper
       calculate_adjacent_mines
     end
   
+    # Случайная постановка мин на поле
     def place_mines
       placed_mines = 0
       while placed_mines < @num_mines
@@ -38,6 +40,7 @@ module Minesweeper
       end
     end
   
+    # Рассчет количества соседних мин для каждой ячейки
     def calculate_adjacent_mines
       @grid.each_with_index do |row, y|
         row.each_with_index do |cell, x|
@@ -49,6 +52,7 @@ module Minesweeper
       end
     end
   
+    # Вспомогательный метод для нахождения координат соседних ячеек
     def adjacent_cells(x, y)
       adjacent = []
       (-1..1).each do |dx|
@@ -61,6 +65,7 @@ module Minesweeper
       adjacent
     end
   
+    # Отображение состояния доски в консоли
     def display
       puts "  #{(0...@width).to_a.join(' ')}"
       @grid.each_with_index do |row, index|
@@ -77,6 +82,7 @@ module Minesweeper
       end
     end
   
+    # Открытие ячейки по заданным координатам
     def reveal(x, y)
       cell = @grid[y][x]
       return if cell.revealed || cell.flagged
@@ -87,6 +93,7 @@ module Minesweeper
       end
     end
   
+    # Открытие всех ячеек (при поражении)
     def reveal_all
       @grid.each do |row|
         row.each do |cell|
@@ -95,6 +102,7 @@ module Minesweeper
       end
     end
   
+    # Проверка, окончена ли игра (победа/поражение)
     def game_over?
       if @grid.any? { |row| row.any? { |cell| cell.mine && cell.revealed } }
         puts "Поражение! Вы наступили на мину."
