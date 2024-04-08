@@ -136,8 +136,8 @@ module Minesweeper
         if @game_over
           @board.reveal_all  
           system "clear" or system "cls"
-          @board.display     
-          puts "Игра окончена! Нажмите любую клавишу, чтобы выйти."
+          @board.display  
+          #puts "Игра окончена! Нажмите любую клавишу, чтобы выйти."
           gets
         end
       end
